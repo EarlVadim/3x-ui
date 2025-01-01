@@ -141,22 +141,22 @@
             <a-row>
               <a-col :xs="24" :sm="24" :lg="12">
                 {{ i18n "pages.inbounds.totalDownUp" }}:
-                <a-tag color="green">[[ sizeFormat(total.up) ]] / [[ sizeFormat(total.down) ]]</a-tag>
+                <a-tag color="blue">[[ sizeFormat(total.up) ]] / [[ sizeFormat(total.down) ]]</a-tag>
               </a-col>
               <a-col :xs="24" :sm="24" :lg="12">
                 {{ i18n "pages.inbounds.totalUsage" }}:
-                <a-tag color="green">[[ sizeFormat(total.up + total.down) ]]</a-tag>
+                <a-tag color="blue">[[ sizeFormat(total.up + total.down) ]]</a-tag>
               </a-col>
               <a-col :xs="24" :sm="24" :lg="12">
                 {{ i18n "pages.inbounds.inboundCount" }}:
-                <a-tag color="green">[[ dbInbounds.length ]]</a-tag>
+                <a-tag color="blue">[[ dbInbounds.length ]]</a-tag>
               </a-col>
               <a-col :xs="24" :sm="24" :lg="12">
                 <template>
                   <div>
                     <a-back-top :target="() => document.getElementById('content-layout')" visibility-height="200"></a-back-top>
                     {{ i18n "clients" }}:
-                    <a-tag color="green">[[ total.clients ]]</a-tag>
+                    <a-tag color="blue">[[ total.clients ]]</a-tag>
                     <a-popover title='{{ i18n "disabled" }}' :overlay-class-name="themeSwitcher.currentTheme">
                       <template slot="content">
                         <p v-for="clientEmail in total.deactive">[[ clientEmail ]]</p>
@@ -179,7 +179,7 @@
                       <template slot="content">
                         <p v-for="clientEmail in onlineClients">[[ clientEmail ]]</p>
                       </template>
-                      <a-tag color="blue" v-if="onlineClients.length">[[ onlineClients.length ]]</a-tag>
+                      <a-tag color="green" v-if="onlineClients.length">[[ onlineClients.length ]]</a-tag>
                     </a-popover>
                   </div>
                 </template>
@@ -336,14 +336,14 @@
               <template slot="protocol" slot-scope="text, dbInbound">
                 <a-tag style="margin:0;" color="purple">[[ dbInbound.protocol ]]</a-tag>
                 <template v-if="dbInbound.isVMess || dbInbound.isVLess || dbInbound.isTrojan || dbInbound.isSS">
-                  <a-tag style="margin:0;" color="green">[[ dbInbound.toInbound().stream.network ]]</a-tag>
-                  <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isTls" color="blue">TLS</a-tag>
-                  <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isReality" color="blue">Reality</a-tag>
+                  <a-tag style="margin:0;" :color="dbInbound.toInbound().stream.network === 'xhttp'? 'orange': 'blue'">[[ dbInbound.toInbound().stream.network ]]</a-tag>
+                  <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isTls" color="green">TLS</a-tag>
+                  <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isReality" color="yellow">Reality</a-tag>
                 </template>
               </template>
               <template slot="clients" slot-scope="text, dbInbound">
                 <template v-if="clientCount[dbInbound.id]">
-                  <a-tag style="margin:0;" color="green">[[ clientCount[dbInbound.id].clients ]]</a-tag>
+                  <a-tag style="margin:0;" color="blue">[[ clientCount[dbInbound.id].clients ]]</a-tag>
                   <a-popover title='{{ i18n "disabled" }}' :overlay-class-name="themeSwitcher.currentTheme">
                     <template slot="content">
                       <p v-for="clientEmail in clientCount[dbInbound.id].deactive">[[ clientEmail ]]</p>
@@ -366,7 +366,7 @@
                     <template slot="content">
                       <p v-for="clientEmail in clientCount[dbInbound.id].online">[[ clientEmail ]]</p>
                     </template>
-                    <a-tag style="margin:0; padding: 0 2px;" color="blue" v-if="clientCount[dbInbound.id].online.length">[[ clientCount[dbInbound.id].online.length ]]</a-tag>
+                    <a-tag style="margin:0; padding: 0 2px;" color="green" v-if="clientCount[dbInbound.id].online.length">[[ clientCount[dbInbound.id].online.length ]]</a-tag>
                   </a-popover>
                 </template>
               </template>
@@ -429,7 +429,7 @@
                           <template v-if="dbInbound.isVMess || dbInbound.isVLess || dbInbound.isTrojan || dbInbound.isSS">
                             <a-tag style="margin:0;" color="blue">[[ dbInbound.toInbound().stream.network ]]</a-tag>
                             <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isTls" color="green">tls</a-tag>
-                            <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isReality" color="green">reality</a-tag>
+                            <a-tag style="margin:0;" v-if="dbInbound.toInbound().stream.isReality" color="yellow">reality</a-tag>
                           </template>
                         </td>
                       </tr>
@@ -1283,7 +1283,7 @@
                     case statsColor == "orange" || expColor == "orange":
                         return "#f37b24"; // Orange
                     case statsColor == "green" || expColor == "green":
-                        return "#008771"; // Green
+                        return "#0e49b5"; // green
                     default:
                         return "#7a316f"; // purple
                 }

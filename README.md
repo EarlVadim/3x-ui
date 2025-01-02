@@ -7,7 +7,7 @@
   </picture>
 </p>
 
-**An Advanced Web Panel • Built on Xray Core**
+**An Advanced Web Panel with Alireza dark-color design • Built on Xray Core**
 
 [![](https://img.shields.io/github/v/release/EarlVadim/3x-ui.svg)](https://github.com/EarlVadim/3x-ui/releases)
 [![GO Version](https://img.shields.io/github/go-mod/go-version/EarlVadim/3x-ui.svg)](#)
